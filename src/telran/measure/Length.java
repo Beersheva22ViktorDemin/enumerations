@@ -15,8 +15,11 @@ public class Length implements Comparable<Length>{
 	 * 10m == 10000mm
 	 */
 	public boolean equals(Object obj) {
-		//TODO
-		return false;
+		boolean result = false;
+		if (obj instanceof Length) {
+			result = compareTo((Length) obj) == 0;
+		}
+		return result;
 	}
 
 	@Override
@@ -27,29 +30,27 @@ public class Length implements Comparable<Length>{
 	 *  > 0 "this" object greater than "o" object,
 	 *  == 0 "this" object equals "o" object,
 	 */
-	public int compareTo(Length o) {
-		//TODO
-		return -1;
+	public int compareTo(Length o) {		
+		return Float.compare(amount * lengthUnit.getValue(), o.amount * o.lengthUnit.getValue());
 	}
+	
 	/**
 	 * 
 	 * @param unit
 	 * @return new Length object with a given LengthUnit
 	 * example, convert(LengthUnit.M) returns Length in meters 
 	 */
-	public Length convert(LengthUnit unit) {
-		//TODO
-		
-		return null;
+	public Length convert(LengthUnit unit) {		
+		return new Length(amount * lengthUnit.getValue() / unit.getValue(), unit);
 	}
+	
 	@Override
 	/**
 	 * returns string with amount and length unit pinned to amount with no space
 	 * Example: 20.0M (string expression of Length object presenting 20 meters)
 	 */
 	public String toString() {
-		//TODO
-		return null;
+		return String.format("%.1f%s", amount, lengthUnit);
 	}
 
 	public float getAmount() {
